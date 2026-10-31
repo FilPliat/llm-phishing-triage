@@ -1,6 +1,6 @@
 HOW TO RUN THE THESIS CODE
 LLM-Assisted Phishing Email Triage for SOC Environments (F. Pliatsikas, CNAM MSc)
-"Thesis Codes" below means the main folder of this repository.
+"Thesis Codes" below means the main folder of this repository
 
 FOLDERS
 - All folder locations are set in config.py (FOLDER LOCATIONS block):
