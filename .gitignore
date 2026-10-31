@@ -1,0 +1,29 @@
+# Private API key: never upload it
+.env
+
+# Outputs created when the scripts run
+results/
+data/processed/unified.csv
+data/processed/train.csv
+data/processed/val.csv
+data/processed/test.csv
+data/processed/*_smoke.csv
+data/processed/uc2_review_sample.csv
+
+# Public UC1 datasets (download them yourself; see HOW_TO_RUN.txt)
+data/*.csv
+data/*/
+
+# Keep the UC2 dataset used in the thesis
+!data/processed/
+!data/processed/uc2_dataset.csv
+
+# Python and editor files
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
