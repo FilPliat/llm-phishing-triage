@@ -1,0 +1,67 @@
+HOW TO RUN THE THESIS CODE
+LLM-Assisted Phishing Email Triage for SOC Environments (F. Pliatsikas, CNAM MSc)
+"Thesis Codes" below means the main folder of this repository.
+
+FOLDERS
+- All folder locations are set in config.py (FOLDER LOCATIONS block):
+    DATASET_DIR    raw public UC1 datasets (default: Thesis Codes/data)
+    PROCESSED_DIR  splits and the UC2 dataset (default: Thesis Codes/data/processed)
+    RESULTS_DIR    result tables, figures and the GPT-4o cache (default: Thesis Codes/results)
+    ENV_FILE       file holding the OpenAI API key (default: Thesis Codes/.env)
+- Each script also lists its own folders at the top (the "Folders used by this script" lines),
+  so a single script can be pointed elsewhere.
+- Each script's header explains what it reads, what it writes and how to run it.
+- config.py and the "src" folder are shared helper code imported by the numbered files.
+
+SETUP
+- Python 3.10 or newer; packages in requirements.txt (pip install -r requirements.txt).
+
+- UC1 needs the public datasets, downloaded separately and placed in the data folder
+  (DATASET_DIR), next to the "processed" folder. Expected file names (see config.py):
+    phishing_legit_dataset_KD_10000.csv   Kaggle 2026
+    enron_spam_data.csv                   Enron
+    Nazario.csv, Nazario_5.csv            Nazario phishing corpus
+    CEAS-08.csv                           CEAS-08
+    Assassin.csv                          SpamAssassin
+
+- The GPT-4o steps need an OpenAI API key in ENV_FILE: copy .env.example to a new file
+  named .env and replace Insert_API_Key_Here with your own key. Keep .env private;
+  .gitignore keeps it out of the repository.
+
+STEPS (in order; commands are run from inside "Thesis Codes")
+- 01  python 01_smoke_test.py            checks the setup and the datasets
+
+- 02  python 02_prepare_data.py          builds the UC1 train/validation/test split
+
+- 03  python 03_run_uc1_baselines.py     TF-IDF models on UC1, Table 2
+
+- 04  python 04_run_uc1_llm.py --n 400   GPT-4o on 400 UC1 emails, Table 3 (API cost)
+
+- 05  05_bert_uc1_colab.ipynb            BERT on UC1, Tables 2-3 and Figures 5-6 (Google Colab, GPU)
+        - reads train/val/test from the Google Drive folder set in READ_DIR inside the notebook
+        - saves its result CSVs in SAVE_DIR inside the notebook (default: the Colab session)
+        - step 11 expects bert_predictions.csv in RESULTS_DIR
+
+- 06  python 06_build_uc2_dataset.py     generates a new UC2 dataset (API cost, optional)
+
+- 07  python 07_fix_dangling_legit_links.py   cleans up a new UC2 dataset (API cost, optional, after 06)
+        - the UC2 dataset used in the thesis is included in PROCESSED_DIR
+        - running 06 replaces it, and its new emails will not be identical (temperature 0.9)
+
+- 08  python 08_run_uc2_evaluation.py    all seven approaches on UC2, Tables 4-6 (API cost)
+        - --skip-llm runs only the three non-LLM approaches
+
+- 09  python 09_explain_uc2_shap.py      SHAP for three GPT-4o verdicts, Figures 7-9 (API cost)
+
+- 10  python 10_shap_beeswarm_tfidf.py   SHAP beeswarm plots, Figures 10-11
+
+- 11  python 11_plot_confusion_matrices.py   confusion matrices, Figures 2-4 (uses 03, 05, 08)
+
+- 12  python 12_plot_triage_tool.py      triage tool diagram, Figure 1
+
+- 13  python 13_plot_architecture.py     proposed architecture diagram, Figure 12
+
+NOTES
+- GPT-4o answers are cached in RESULTS_DIR/llm_cache, so rerunning a finished step does not call the API again.
+
+- GPT-4o is called with snapshot gpt-4o-2024-08-06 at temperature 0. A new run can still differ slightly from the thesis results.

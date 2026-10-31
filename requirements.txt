@@ -1,0 +1,24 @@
+# Python dependencies for the scripts in this folder.
+# Python 3.10 or newer. Install into a virtual environment:
+#   python -m venv .venv
+#   .venv\Scripts\activate            (Windows)   or   source .venv/bin/activate   (macOS / Linux)
+#   pip install -r requirements.txt
+
+# Data handling
+pandas>=2.0
+numpy>=1.24
+
+# Classical baselines (TF-IDF + Logistic Regression / Random Forest)
+scikit-learn>=1.3
+
+# GPT-4o through the OpenAI API (the key is read from the .env file)
+openai>=1.30
+python-dotenv>=1.0
+
+# Explainability and figures
+shap>=0.44
+matplotlib>=3.7
+
+# NOTE: the BERT fine-tuning (torch, transformers, datasets) runs in Google Colab.
+# The notebook 05_bert_uc1_colab.ipynb installs what it needs itself,
+# so these packages are not required on your own computer.
