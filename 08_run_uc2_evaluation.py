@@ -7,8 +7,8 @@ The non-LLM approaches use all 3,000 emails; GPT-4o uses a 750-email stratified 
 Thesis: Sections 3.3–3.4; results in Section 4.2 (Tables 4–6, Figures 3–4).
 
 Reads:
-DATASET_FILE — the UC2 dataset from 06 and 07.
-UC1_READ_DIR/train.csv — UC1 training split from 02_prepare_data.py.
+DATASET_FILE — the UC2 dataset from 06 and 07
+UC1_READ_DIR/train.csv — UC1 training split from 02_prepare_data.py
 
 Writes:
 SAVE_DIR/uc2_overall.csv, uc2_per_scenario.csv, uc2_per_technique.csv — result tables.
