@@ -166,7 +166,7 @@ def build_unified(include_enron_spam: bool = False) -> pd.DataFrame:
             parts.append(df)
     parts.extend(load_all_figshare())
     if not parts:
-        raise RuntimeError("No datasets found under dataset/. Check config paths.")
+        raise RuntimeError("No UC1 datasets found in the data folder (DATASET_DIR). See HOW_TO_RUN.txt.")
     unified = pd.concat(parts, ignore_index=True)
     unified = unified.drop_duplicates(subset=["text"]).reset_index(drop=True)
     return unified
