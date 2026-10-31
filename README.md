@@ -31,7 +31,6 @@ The steps that call the OpenAI API (04, 06, 07, 08 and 09) have an API cost. All
 ## Notes
 
 - GPT-4o is called with the snapshot `gpt-4o-2024-08-06` at temperature 0. A new run can still differ slightly from the thesis results.
-- The prompt wording in `src/llm_classifier.py` was lightly edited for readability after the experiments, without changing its meaning.
 - The UC2 emails were generated with GPT-4o at temperature 0.9. Running step 06 creates a new dataset whose emails will not be identical to the included one.
 - "Thesis Codes" in the scripts and in `HOW_TO_RUN.txt` means the main folder of this repository.
 
